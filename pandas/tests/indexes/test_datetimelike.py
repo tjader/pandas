@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import timedelta, time, date, datetime
+from datetime import timedelta, time
 
 import numpy as np
 
@@ -744,12 +744,14 @@ class TestDatetimeIndex(DatetimeLike, tm.TestCase):
             elem = self.create_elem_outside_index()
             elem_str = str(elem)
             elem_date_str = str(elem.date())
-            for e in [elem, elem_str, elem_date_str, elem.date(), elem.to_datetime()]:
+            for e in [elem, elem_str, elem_date_str, elem.date(),
+                      elem.to_datetime()]:
                 self.assertNotIn(e, idx)
             for elem in monotonic:
                 elem_str = str(elem)
                 elem_date_str = str(elem.date())
-                for e in [elem, elem_str, elem_date_str, elem.date(), elem.to_datetime()]:
+                for e in [elem, elem_str, elem_date_str, elem.date(),
+                          elem.to_datetime()]:
                     self.assertIn(e, idx)
         nat_elems = [pd.NaT, None, float('nan'), np.nan]
         for idx in idx_no_nat:
@@ -972,7 +974,8 @@ class TestPeriodIndex(DatetimeLike, tm.TestCase):
                 elem_str = str(elem)
                 for e in [elem, elem_str]:
                     self.assertIn(e, idx)
-        nat_elems = [pd.Period('NaT', freq='D'), pd.NaT, None, float('nan'), np.nan]
+        nat_elems = [pd.Period('NaT', freq='D'), pd.NaT,
+                     None, float('nan'), np.nan]
         for idx in idx_no_nat:
             for nn in nat_elems:
                 self.assertNotIn(nn, idx)
